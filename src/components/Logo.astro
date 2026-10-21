@@ -1,0 +1,12 @@
+---
+interface Props {
+  href?: string;
+}
+const { href = "/" } = Astro.props;
+---
+
+<a class="logo" href={href} aria-label="The GTA Cleaning Co.">
+  <b>THE GTA</b>
+  <span>Cleaning Co</span>
+  <small>TORONTO</small>
+</a>

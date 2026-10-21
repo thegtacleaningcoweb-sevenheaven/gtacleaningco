@@ -1,0 +1,13 @@
+---
+import { serviceAreas } from "../data/content";
+---
+
+<section id="service-area">
+  <div class="w">
+    <p class="eb">Service area</p>
+    <h2>We proudly serve the GTA</h2>
+    <div class="pills">
+      {serviceAreas.map((area) => <span>{area}</span>)}
+    </div>
+  </div>
+</section>

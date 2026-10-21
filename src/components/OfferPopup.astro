@@ -1,0 +1,32 @@
+<dialog class="offer" id="offer" aria-labelledby="offer-title">
+  <button class="offer-x" id="offer-close" type="button" aria-label="Close">×</button>
+  <h2 class="offer-kicker" id="offer-title">GET $25 OFF</h2>
+  <p class="offer-sub">on your first cleaning</p>
+  <p class="offer-lead">Leave your email and phone. We'll email you the code.</p>
+  <form id="offer-form" novalidate>
+    <div class="hp">
+      <label for="offer-company">Company</label>
+      <input id="offer-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="fld">
+      <label class="f" for="offer-email">Email</label>
+      <input id="offer-email" name="email" type="email" autocomplete="email" inputmode="email" />
+    </div>
+    <div class="fld">
+      <label class="f" for="offer-phone">Phone</label>
+      <input id="offer-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+    </div>
+    <p class="err" id="offer-err" role="alert"></p>
+    <button class="btn block" id="offer-submit" type="submit">Send me the code</button>
+    <button class="offer-skip" id="offer-skip" type="button">No thanks</button>
+  </form>
+  <div id="offer-ok" hidden>
+    <h3>Check your inbox</h3>
+    <p id="offer-ok-text"></p>
+  </div>
+</dialog>
+
+<script>
+  import { initOffer } from "../scripts/offer";
+  initOffer();
+</script>

@@ -1,0 +1,39 @@
+---
+import { checklists } from "../data/checklists";
+---
+
+<section id="checklists">
+  <div class="w">
+    <p class="eb">Resources</p>
+    <h2>Know exactly what's included</h2>
+    <p class="lead">Download our cleaning checklists, and see our policies and what falls outside our services.</p>
+    <div class="rg3">
+      {
+        checklists.map((item) => (
+          <div class="rc">
+            <h3>{item.cardTitle}</h3>
+            <p>{item.cardText}</p>
+            <button class="btn ghost" type="button" data-open={item.id}>
+              View checklist
+            </button>
+            <a class="btn" href={item.pdf} download={item.filename}>
+              PDF
+            </a>
+          </div>
+        ))
+      }
+    </div>
+    <div class="rg3 two">
+      <div class="rc">
+        <h3>Our policies</h3>
+        <p>Payment, arrival, children, health, add-ons, and cancellations.</p>
+        <button class="btn ghost" type="button" data-open="policy">Read policies</button>
+      </div>
+      <div class="rc">
+        <h3>Services we don't provide</h3>
+        <p>What falls outside our scope, so there are no surprises.</p>
+        <button class="btn ghost" type="button" data-open="excl">See the list</button>
+      </div>
+    </div>
+  </div>
+</section>

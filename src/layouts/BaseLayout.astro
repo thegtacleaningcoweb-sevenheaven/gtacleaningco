@@ -1,0 +1,154 @@
+---
+import "../styles/global.css";
+import "@fontsource/figtree/latin-400.css";
+import "@fontsource/figtree/latin-500.css";
+import "@fontsource/figtree/latin-600.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-700.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickyBar from "../components/StickyBar.astro";
+import InfoDialog from "../components/InfoDialog.astro";
+import OfferPopup from "../components/OfferPopup.astro";
+import { site } from "../data/site";
+import { faqs, serviceAreas, services } from "../data/content";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  includeFaq?: boolean;
+}
+
+const { title, description, noindex = false, includeFaq = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.name,
+    description: site.description,
+    inLanguage: site.locale,
+    publisher: { "@id": `${site.url}/#business` },
+  },
+  {
+    "@type": "HousekeepingService",
+    "@id": `${site.url}/#business`,
+    name: site.name,
+    slogan: site.slogan,
+    url: site.url,
+    image: ogImage.href,
+    logo: new URL("/favicon.svg", Astro.site).href,
+    description: site.description,
+    telephone: site.phoneTel,
+    email: site.email,
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.city,
+      addressRegion: site.region,
+      addressCountry: site.country,
+    },
+    areaServed: serviceAreas.map((name) => ({ "@type": "City", name })),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Cleaning services",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.text,
+        },
+      })),
+    },
+  },
+];
+
+if (includeFaq) {
+  graph.push({
+    "@type": "FAQPage",
+    "@id": `${site.url}/#faq`,
+    mainEntity: faqs
+      .filter((item) => item.schema)
+      .map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+  });
+}
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": graph,
+}).replace(/</g, "\\u003c");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      )
+    }
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content={site.themeColor} />
+    <meta name="color-scheme" content="light" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.ogLocale} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The GTA Cleaning Co. — premium cleaning in Toronto and the GTA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="The GTA Cleaning Co. — premium cleaning in Toronto and the GTA" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {!noindex && <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />}
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <p class="ann">
+      Serving Toronto &amp; the GTA · Steam-cleaning add-on available on any package ·
+      <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
+    </p>
+    <div class="w">
+      <Header />
+    </div>
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <StickyBar />
+    <InfoDialog />
+    <OfferPopup />
+  </body>
+</html>

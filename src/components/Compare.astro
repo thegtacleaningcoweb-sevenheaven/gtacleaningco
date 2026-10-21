@@ -1,0 +1,113 @@
+---
+import { compareAreas, compareColumns, compareTasks, type Coverage } from "../data/compare";
+
+const fields = ["regular", "deep", "move"] as const;
+const initialColumn = 2;
+const core = compareTasks.filter((task) => fields.some((field) => task[field] !== 2));
+const covered = core.filter((task) => task.deep === 1).length;
+const percent = Math.round((covered / core.length) * 100);
+
+function same(task: (typeof compareTasks)[number]) {
+  return task.regular === task.deep && task.deep === task.move;
+}
+---
+
+<section id="compare">
+  <div class="w">
+    <p class="eb">Compare services</p>
+    <h2>What's included in each clean</h2>
+    <p class="lead">Tap a service to see what it covers, filter by area, or show only the differences.</p>
+    <div class="cf">
+      <div class="fl" id="fl" role="group" aria-label="Filter by area">
+        {
+          compareAreas.map((area) => (
+            <button type="button" data-area={area} aria-pressed={area === "All" ? "true" : "false"}>
+              {area}
+            </button>
+          ))
+        }
+      </div>
+      <label class="df"><input type="checkbox" id="df" /> Show differences only</label>
+    </div>
+    <div class="cmp">
+      <table id="cmp">
+        <caption class="sr-only">What's included in Regular, Deep, and Move-In / Move-Out cleaning</caption>
+        <thead>
+          <tr>
+            <th scope="col">Area / task</th>
+            {
+              compareColumns.map((column) => (
+                <th scope="col" data-c={column.id} class:list={{ sel: column.id === initialColumn }}>
+                  <button type="button">
+                    {column.lines[0]}
+                    <br />
+                    {column.lines[1]}
+                  </button>
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody id="cmpb">
+          {
+            compareTasks.flatMap((task, index) => {
+              const showGroup = index === 0 || compareTasks[index - 1].area !== task.area;
+              const values: Coverage[] = [task.regular, task.deep, task.move];
+              const row = (
+                <tr data-area={task.area} data-v={values.join(",")} data-same={same(task) ? "true" : "false"}>
+                  <th scope="row">{task.name}</th>
+                  {values.map((value, valueIndex) => (
+                    <td data-c={valueIndex + 1} class:list={{ sel: valueIndex + 1 === initialColumn }}>
+                      {value === 1 && (
+                        <i class="y" aria-label="Included">
+                          ✓
+                        </i>
+                      )}
+                      {value === 0 && (
+                        <i class="n" aria-label="Not included">
+                          ✕
+                        </i>
+                      )}
+                      {value === 2 && (
+                        <i class="a" aria-label="Optional add-on">
+                          Add-on
+                        </i>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+              if (!showGroup) return [row];
+              return [
+                <tr class="gr" data-group={task.area}>
+                  <td colspan="4">{task.area}</td>
+                </tr>,
+                row,
+              ];
+            })
+          }
+          <tr id="cmpempty" hidden>
+            <td colspan="4">No differences in this area.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lg">
+      <span><i class="y">✓</i> Included</span>
+      <span><i class="n">✕</i> Not included</span>
+      <span><i class="a">Add-on</i> Optional extra</span>
+    </div>
+    <div class="cs" id="cs" aria-live="polite">
+      <div>
+        <strong id="cst">Deep Cleaning covers {covered} of {core.length} tasks, plus optional add-ons.</strong>
+        <div class="mt"><i id="csm" style={`width:${percent}%`}></i></div>
+      </div>
+      <button class="btn" id="csb" type="button">Get a quote for Deep Cleaning →</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initCompare } from "../scripts/compare";
+  initCompare();
+</script>

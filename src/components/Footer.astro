@@ -1,0 +1,34 @@
+---
+import Logo from "./Logo.astro";
+import { site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="w fg">
+    <div>
+      <Logo />
+      <p class="slogan">{site.slogan}</p>
+      <p>Premium residential and commercial cleaning across Toronto and the GTA.</p>
+    </div>
+    <nav aria-label="Explore">
+      <p class="foot-label">Explore</p>
+      <a href="/#services">Services</a>
+      <a href="/#results">Results</a>
+      <a href="/#checklists">Checklists</a>
+      <a href="/#about">About</a>
+    </nav>
+    <nav aria-label="Good to know">
+      <p class="foot-label">Good to know</p>
+      <a href="/#checklists" data-open="policy">Policies</a>
+      <a href="/#checklists" data-open="excl">Services we don't provide</a>
+    </nav>
+    <nav aria-label="Contact">
+      <p class="foot-label">Contact</p>
+      <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <a href="/#quote">Get a quote</a>
+    </nav>
+  </div>
+  <div class="w cp">© {year} The GTA Cleaning Co. · Toronto &amp; the GTA</div>
+</footer>

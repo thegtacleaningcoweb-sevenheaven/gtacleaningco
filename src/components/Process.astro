@@ -1,0 +1,32 @@
+---
+import { reasons, steps } from "../data/content";
+---
+
+<section id="how-it-works">
+  <div class="w">
+    <p class="eb">How it works</p>
+    <h2>Get a clean space in 4 simple steps</h2>
+    <ol class="steps">
+      {
+        steps.map((step) => (
+          <li>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="eb block-gap">Why choose us</p>
+    <h2>The difference is in the details</h2>
+    <div class="why">
+      {
+        reasons.map((reason) => (
+          <div>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+import Logo from "./Logo.astro";
+import { site } from "../data/site";
+---
+
+<header>
+  <Logo />
+  <nav class="nv" aria-label="Primary">
+    <a href="/#services">Services</a>
+    <a href="/#results">Results</a>
+    <a href="/#about">About</a>
+    <a class="tel" href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+    <a class="btn" href="/#quote">Get a quote →</a>
+  </nav>
+</header>

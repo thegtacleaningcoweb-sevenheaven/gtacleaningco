@@ -1,0 +1,27 @@
+---
+import About from "../components/About.astro";
+import Compare from "../components/Compare.astro";
+import Hero from "../components/Hero.astro";
+import Process from "../components/Process.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import Resources from "../components/Resources.astro";
+import Results from "../components/Results.astro";
+import ServiceArea from "../components/ServiceArea.astro";
+import Services from "../components/Services.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={site.title} description={site.description} includeFaq>
+  <div class="w">
+    <Hero />
+  </div>
+  <Services />
+  <Compare />
+  <Results />
+  <Process />
+  <About />
+  <Resources />
+  <ServiceArea />
+  <QuoteForm />
+</BaseLayout>

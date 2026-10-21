@@ -1,0 +1,195 @@
+<section id="quote">
+  <div class="w">
+    <p class="eb">Get a quote</p>
+    <h2>Request your quote</h2>
+    <p class="lead">Answer a few quick questions. We'll email you a confirmation and send your request to our team.</p>
+
+    <div class="form" id="formWrap">
+      <div class="bar" aria-hidden="true">
+        <i class="on" data-l="Property">1</i>
+        <i data-l="Service">2</i>
+        <i data-l="Add-ons">3</i>
+        <i data-l="Contact">4</i>
+      </div>
+      <p class="sr-only" id="stepname" aria-live="polite">Step 1 of 4 · Your property</p>
+      <form id="f" novalidate>
+        <fieldset class="on">
+          <legend>Tell us about your property</legend>
+          <div class="fld">
+            <label class="f" for="ptype">Property type</label>
+            <select id="ptype" name="ptype">
+              <option>House</option>
+              <option>Condo</option>
+              <option>Apartment</option>
+              <option>Townhouse</option>
+              <option>Commercial space</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="g">
+            <div class="fld">
+              <label class="f" for="bed">Bedrooms</label>
+              <input type="number" id="bed" name="bed" min="0" inputmode="numeric" />
+            </div>
+            <div class="fld">
+              <label class="f" for="bath">Bathrooms</label>
+              <input type="number" id="bath" name="bath" min="0" inputmode="numeric" />
+            </div>
+            <div class="fld">
+              <label class="f" for="lvl">Levels / floors</label>
+              <input type="number" id="lvl" name="lvl" min="1" inputmode="numeric" />
+            </div>
+            <div class="fld">
+              <label class="f" for="sqft">Approx. square feet</label>
+              <input type="number" id="sqft" name="sqft" min="0" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f">Basement</label>
+            <div class="chips">
+              <input type="radio" name="base" id="b0" value="No basement" checked />
+              <label for="b0">None</label>
+              <input type="radio" name="base" id="b1" value="Finished basement" />
+              <label for="b1">Finished</label>
+              <input type="radio" name="base" id="b2" value="Unfinished basement" />
+              <label for="b2">Unfinished</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f">Who lives there?</label>
+            <div class="chips">
+              <input type="checkbox" name="live" id="l1" value="Pets" />
+              <label for="l1">Pets</label>
+              <input type="checkbox" name="live" id="l2" value="Small children" />
+              <label for="l2">Small children</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="pets">If pets, how many and what type?</label>
+            <input type="text" id="pets" name="pets" placeholder="e.g. 1 dog, 2 cats" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>What kind of cleaning do you need?</legend>
+          <div class="fld">
+            <label class="f">Service</label>
+            <div class="chips">
+              <input type="radio" name="svc" id="s1" value="Regular cleaning" checked />
+              <label for="s1">Regular</label>
+              <input type="radio" name="svc" id="s2" value="Deep cleaning" />
+              <label for="s2">Deep clean</label>
+              <input type="radio" name="svc" id="s3" value="Move-in / move-out" />
+              <label for="s3">Move-in / out</label>
+              <input type="radio" name="svc" id="s4" value="Post-construction" />
+              <label for="s4">Post-construction</label>
+              <input type="radio" name="svc" id="s5" value="Commercial cleaning" />
+              <label for="s5">Commercial</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f">How often?</label>
+            <div class="chips">
+              <input type="radio" name="freq" id="q1" value="One time" checked />
+              <label for="q1">One time</label>
+              <input type="radio" name="freq" id="q2" value="Weekly" />
+              <label for="q2">Weekly</label>
+              <input type="radio" name="freq" id="q3" value="Bi-weekly" />
+              <label for="q3">Bi-weekly</label>
+              <input type="radio" name="freq" id="q4" value="Monthly" />
+              <label for="q4">Monthly</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="last">When was the last professional cleaning?</label>
+            <input type="text" id="last" name="last" placeholder="e.g. 3 months ago, never" />
+          </div>
+          <div class="fld">
+            <label class="f" for="neglect">Any areas not cleaned in a long time?</label>
+            <textarea id="neglect" name="neglect"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Any add-ons or special requests?</legend>
+          <p class="lead hint">Please request add-ons now. They take extra time and labor, and add-ons requested after booking are scheduled for the next cleaning.</p>
+          <div class="fld">
+            <div class="chips">
+              <input type="checkbox" name="add" id="a1" value="Inside fridge" />
+              <label for="a1">Inside fridge</label>
+              <input type="checkbox" name="add" id="a2" value="Inside oven" />
+              <label for="a2">Inside oven</label>
+              <input type="checkbox" name="add" id="a3" value="Interior windows" />
+              <label for="a3">Interior windows</label>
+              <input type="checkbox" name="add" id="a4" value="Inside cabinets/drawers" />
+              <label for="a4">Cabinets &amp; drawers</label>
+              <input type="checkbox" name="add" id="a5" value="Blinds/shutters" />
+              <label for="a5">Blinds &amp; shutters</label>
+              <input type="checkbox" name="add" id="a6" value="Garage/patio/balcony" />
+              <label for="a6">Garage, patio, balcony</label>
+              <input type="checkbox" name="add" id="a7" value="Steam cleaning" />
+              <label for="a7">Steam cleaning</label>
+              <input type="checkbox" name="add" id="a8" value="Heavy buildup (grease, mold, hard water)" />
+              <label for="a8">Heavy buildup</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="delicate">Delicate surfaces we should know about?</label>
+            <input type="text" id="delicate" name="delicate" />
+          </div>
+          <div class="fld">
+            <label class="f" for="prio">Areas to prioritize?</label>
+            <textarea id="prio" name="prio"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Where should we send your quote?</legend>
+          <div class="g">
+            <div class="fld">
+              <label class="f" for="name">Full name</label>
+              <input type="text" id="name" name="name" autocomplete="name" />
+            </div>
+            <div class="fld">
+              <label class="f" for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+          </div>
+          <div class="fld">
+            <label class="f" for="addr">Address or postal code</label>
+            <input type="text" id="addr" name="addr" autocomplete="postal-code" />
+          </div>
+          <div class="fld">
+            <label class="f" for="when">Preferred date and time</label>
+            <input type="text" id="when" name="when" placeholder="e.g. Saturday morning" />
+          </div>
+        </fieldset>
+
+        <div class="hp">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <p class="agree">By sending your request you agree to our <a href="/#checklists" data-open="policy">Policies</a>.</p>
+        <div class="err" id="err" role="alert"></div>
+        <div class="nav">
+          <button type="button" class="btn ghost" id="back" style="visibility:hidden">Back</button>
+          <button type="button" class="btn" id="next">Continue</button>
+        </div>
+      </form>
+
+      <div class="done" id="done">
+        <h3>Request received</h3>
+        <p>We emailed you a confirmation and sent your details to our team. We'll reply with your quote and availability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initQuote } from "../scripts/quote";
+  initQuote();
+</script>

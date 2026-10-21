@@ -1,0 +1,32 @@
+---
+import Photo from "./Photo.astro";
+import { services } from "../data/content";
+---
+
+<section id="services">
+  <div class="w">
+    <p class="eb">Our services</p>
+    <h2>Cleaning solutions for every space</h2>
+    <div class="cards">
+      {
+        services.map((service) => (
+          <article class="card" data-svc={service.id}>
+            <Photo src={service.image} alt={service.alt} />
+            <div class="t">
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+              <a href={service.href}>{service.link}</a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <div class="banner">
+      <div>
+        <strong>Steam-cleaning add-on</strong>
+        <p>Sanitize floors, bathrooms, kitchens, and upholstery. Add it to any package.</p>
+      </div>
+      <a class="btn" href="/#quote">Add it to my quote →</a>
+    </div>
+  </div>
+</section>

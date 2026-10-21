@@ -1,0 +1,27 @@
+---
+import Photo from "./Photo.astro";
+import { images } from "../data/images";
+import { site } from "../data/site";
+---
+
+<section class="hero">
+  <div class="hg">
+    <div>
+      <p class="eb">{site.slogan}</p>
+      <h1>Professional cleaning for homes and businesses across the GTA.</h1>
+      <p>Reliable, detailed and fully managed and quality-checked on every visit. We take care of the cleaning, so you don't have to.</p>
+      <a class="btn" href="/#quote">Get a quote →</a>
+      <a class="btn ghost" href="/#services">Explore services</a>
+      <div class="trust">
+        <span>Trusted &amp; insured</span>
+        <span>Eco-friendly products</span>
+        <span>5★ client rated</span>
+      </div>
+    </div>
+    <div class="mos">
+      <Photo class="r1 span2" badge="Homes" src={images.heroHomes} alt="Dining and living room cleaned in a Toronto home" label="Add photo" eager />
+      <Photo class="r3" badge="Offices" src={images.heroOffices} alt="Polished commercial gallery floor after cleaning" label="Add photo" />
+      <Photo class="r3" badge="Move-in/out" src={images.heroMove} alt="Laundry room before a move-in or move-out clean" label="Add photo" />
+    </div>
+  </div>
+</section>

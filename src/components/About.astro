@@ -1,0 +1,33 @@
+---
+import Photo from "./Photo.astro";
+import { about, faqs, review } from "../data/content";
+---
+
+<section id="about">
+  <div class="w tri">
+    <div>
+      <Photo class="r1" src={about.image} alt={about.alt} label="Add team photo" />
+      <p class="eb">About us</p>
+      <h2 class="about-title">{about.title}</h2>
+      <p class="muted">{about.text}</p>
+      <p class="quote">{about.quote}</p>
+    </div>
+    <div>
+      <p class="eb">What our clients say</p>
+      <p class="stars" aria-label="5 out of 5 stars">{review.stars}</p>
+      <p>{review.quote}</p>
+      <cite>{review.cite}</cite>
+    </div>
+    <div id="faq">
+      <p class="eb">FAQ</p>
+      {
+        faqs.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
