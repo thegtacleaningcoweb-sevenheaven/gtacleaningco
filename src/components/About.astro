@@ -1,6 +1,6 @@
 ---
 import Photo from "./Photo.astro";
-import { about, faqs, review } from "../data/content";
+import { about, faqs, reviews } from "../data/content";
 ---
 
 <section id="about">
@@ -9,14 +9,19 @@ import { about, faqs, review } from "../data/content";
       <Photo class="r1" src={about.image} alt={about.alt} label="Add team photo" />
       <p class="eb">About us</p>
       <h2 class="about-title">{about.title}</h2>
-      <p class="muted">{about.text}</p>
-      <p class="quote">{about.quote}</p>
+      {about.paragraphs.map((paragraph) => <p class="muted">{paragraph}</p>)}
     </div>
-    <div>
+    <div class="reviews">
       <p class="eb">What our clients say</p>
-      <p class="stars" aria-label="5 out of 5 stars">{review.stars}</p>
-      <p>{review.quote}</p>
-      <cite>{review.cite}</cite>
+      {
+        reviews.map((review) => (
+          <blockquote>
+            <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <p>{review.quote}</p>
+            <cite>{review.cite}</cite>
+          </blockquote>
+        ))
+      }
     </div>
     <div id="faq">
       <p class="eb">FAQ</p>

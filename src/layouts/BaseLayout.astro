@@ -10,7 +10,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import StickyBar from "../components/StickyBar.astro";
 import InfoDialog from "../components/InfoDialog.astro";
-import OfferPopup from "../components/OfferPopup.astro";
 import { site } from "../data/site";
 import { faqs, serviceAreas, services } from "../data/content";
 
@@ -46,6 +45,7 @@ const graph: Record<string, unknown>[] = [
     description: site.description,
     telephone: site.phoneTel,
     email: site.email,
+    sameAs: [site.facebook],
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
@@ -137,7 +137,7 @@ const jsonLd = JSON.stringify({
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <p class="ann">
-      Serving Toronto &amp; the GTA · Steam-cleaning add-on available on any package ·
+      Serving Toronto &amp; the GTA · <a href="/#quote">$25 off your first cleaning</a> ·
       <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
     </p>
     <div class="w">
@@ -149,6 +149,5 @@ const jsonLd = JSON.stringify({
     <Footer />
     <StickyBar />
     <InfoDialog />
-    <OfferPopup />
   </body>
 </html>

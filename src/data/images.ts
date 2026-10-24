@@ -23,5 +23,5 @@ export const images = {
   livingBefore: "/images/before-others-2.webp",
   livingAfter: "/images/after-others-2.webp",
   gallery: ["", "", "", ""],
-  team: "",
+  team: "/images/about.jpg",
 } as const;

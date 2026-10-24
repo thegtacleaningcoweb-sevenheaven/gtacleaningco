@@ -6,14 +6,90 @@
 
     <div class="form" id="formWrap">
       <div class="bar" aria-hidden="true">
-        <i class="on" data-l="Property">1</i>
-        <i data-l="Service">2</i>
-        <i data-l="Add-ons">3</i>
-        <i data-l="Contact">4</i>
+        <i class="on" data-l="Contact">1</i>
+        <i data-l="Address">2</i>
+        <i data-l="Schedule">3</i>
+        <i data-l="Service">4</i>
+        <i data-l="Property">5</i>
+        <i data-l="Add-ons">6</i>
       </div>
-      <p class="sr-only" id="stepname" aria-live="polite">Step 1 of 4 · Your property</p>
+      <p class="stepname" id="stepname" aria-live="polite">Step 1 of 6 · Contact details</p>
       <form id="f" novalidate>
         <fieldset class="on">
+          <legend>Contact details</legend>
+          <div class="g">
+            <div class="fld">
+              <label class="f" for="name">Full name</label>
+              <input type="text" id="name" name="name" autocomplete="name" />
+            </div>
+            <div class="fld">
+              <label class="f" for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Address</legend>
+          <div class="fld">
+            <label class="f" for="addr">Address or postal code</label>
+            <input type="text" id="addr" name="addr" autocomplete="street-address" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Cleaning schedule</legend>
+          <div class="fld">
+            <label class="f">How often?</label>
+            <div class="chips">
+              <input type="radio" name="freq" id="q1" value="One time" checked />
+              <label for="q1">One time</label>
+              <input type="radio" name="freq" id="q2" value="Weekly" />
+              <label for="q2">Weekly</label>
+              <input type="radio" name="freq" id="q3" value="Bi-weekly" />
+              <label for="q3">Bi-weekly</label>
+              <input type="radio" name="freq" id="q4" value="Monthly" />
+              <label for="q4">Monthly</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="when">Preferred date and time</label>
+            <input type="text" id="when" name="when" placeholder="e.g. Saturday morning" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Type of service</legend>
+          <div class="fld">
+            <label class="f">Service</label>
+            <div class="chips">
+              <input type="radio" name="svc" id="s1" value="Regular cleaning" checked />
+              <label for="s1">Regular</label>
+              <input type="radio" name="svc" id="s2" value="Deep cleaning" />
+              <label for="s2">Deep clean</label>
+              <input type="radio" name="svc" id="s3" value="Move-in / move-out" />
+              <label for="s3">Move-in / out</label>
+              <input type="radio" name="svc" id="s4" value="Post-construction" />
+              <label for="s4">Post-construction</label>
+              <input type="radio" name="svc" id="s5" value="Commercial cleaning" />
+              <label for="s5">Commercial</label>
+            </div>
+          </div>
+          <div class="fld">
+            <label class="f" for="last">When was the last professional cleaning?</label>
+            <input type="text" id="last" name="last" placeholder="e.g. 3 months ago, never" />
+          </div>
+          <div class="fld">
+            <label class="f" for="neglect">Any areas not cleaned in a long time?</label>
+            <textarea id="neglect" name="neglect"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
           <legend>Tell us about your property</legend>
           <div class="fld">
             <label class="f" for="ptype">Property type</label>
@@ -71,46 +147,6 @@
         </fieldset>
 
         <fieldset>
-          <legend>What kind of cleaning do you need?</legend>
-          <div class="fld">
-            <label class="f">Service</label>
-            <div class="chips">
-              <input type="radio" name="svc" id="s1" value="Regular cleaning" checked />
-              <label for="s1">Regular</label>
-              <input type="radio" name="svc" id="s2" value="Deep cleaning" />
-              <label for="s2">Deep clean</label>
-              <input type="radio" name="svc" id="s3" value="Move-in / move-out" />
-              <label for="s3">Move-in / out</label>
-              <input type="radio" name="svc" id="s4" value="Post-construction" />
-              <label for="s4">Post-construction</label>
-              <input type="radio" name="svc" id="s5" value="Commercial cleaning" />
-              <label for="s5">Commercial</label>
-            </div>
-          </div>
-          <div class="fld">
-            <label class="f">How often?</label>
-            <div class="chips">
-              <input type="radio" name="freq" id="q1" value="One time" checked />
-              <label for="q1">One time</label>
-              <input type="radio" name="freq" id="q2" value="Weekly" />
-              <label for="q2">Weekly</label>
-              <input type="radio" name="freq" id="q3" value="Bi-weekly" />
-              <label for="q3">Bi-weekly</label>
-              <input type="radio" name="freq" id="q4" value="Monthly" />
-              <label for="q4">Monthly</label>
-            </div>
-          </div>
-          <div class="fld">
-            <label class="f" for="last">When was the last professional cleaning?</label>
-            <input type="text" id="last" name="last" placeholder="e.g. 3 months ago, never" />
-          </div>
-          <div class="fld">
-            <label class="f" for="neglect">Any areas not cleaned in a long time?</label>
-            <textarea id="neglect" name="neglect"></textarea>
-          </div>
-        </fieldset>
-
-        <fieldset>
           <legend>Any add-ons or special requests?</legend>
           <p class="lead hint">Please request add-ons now. They take extra time and labor, and add-ons requested after booking are scheduled for the next cleaning.</p>
           <div class="fld">
@@ -140,32 +176,6 @@
           <div class="fld">
             <label class="f" for="prio">Areas to prioritize?</label>
             <textarea id="prio" name="prio"></textarea>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Where should we send your quote?</legend>
-          <div class="g">
-            <div class="fld">
-              <label class="f" for="name">Full name</label>
-              <input type="text" id="name" name="name" autocomplete="name" />
-            </div>
-            <div class="fld">
-              <label class="f" for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" />
-            </div>
-          </div>
-          <div class="fld">
-            <label class="f" for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" />
-          </div>
-          <div class="fld">
-            <label class="f" for="addr">Address or postal code</label>
-            <input type="text" id="addr" name="addr" autocomplete="postal-code" />
-          </div>
-          <div class="fld">
-            <label class="f" for="when">Preferred date and time</label>
-            <input type="text" id="when" name="when" placeholder="e.g. Saturday morning" />
           </div>
         </fieldset>
 

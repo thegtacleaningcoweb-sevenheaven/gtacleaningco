@@ -1,4 +1,4 @@
-const stepNames = ["Your property", "Service type", "Add-ons", "Contact"];
+const stepNames = ["Contact details", "Address", "Cleaning schedule", "Type of service", "Your property", "Add-ons"];
 
 function field(id: string) {
   const element = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null;
@@ -50,13 +50,22 @@ export function initQuote() {
 
   let index = 0;
 
+  function contactError() {
+    if (!field("name")) return "Please add your name so we can follow up.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field("email"))) return "Enter a valid email so we can follow up.";
+    const digits = field("phone").replace(/\D/g, "");
+    const local = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+    if (field("phone") && local.length !== 10) return "Enter a 10-digit phone number, or leave the phone blank.";
+    return "";
+  }
+
   function show(nextIndex: number, shouldScroll = true) {
     index = nextIndex;
     steps.forEach((step, stepIndex) => step.classList.toggle("on", stepIndex === index));
     bars.forEach((item, stepIndex) => item.classList.toggle("on", stepIndex <= index));
-    stepName.textContent = `Step ${index + 1} of 4 · ${stepNames[index]}`;
+    stepName.textContent = `Step ${index + 1} of ${steps.length} · ${stepNames[index]}`;
     back.style.visibility = index ? "visible" : "hidden";
-    next.textContent = index === 3 ? "Send my request" : "Continue";
+    next.textContent = index === steps.length - 1 ? "Send my request" : "Continue";
     error.textContent = "";
     if (shouldScroll) {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -99,14 +108,22 @@ export function initQuote() {
     }
   }
 
-  back.addEventListener("click", () => show(index - 1));
-  next.addEventListener("click", () => {
-    if (index < 3) show(index + 1);
+  function advance() {
+    if (index === 0) {
+      const message = contactError();
+      if (message) {
+        error.textContent = message;
+        return;
+      }
+    }
+    if (index < steps.length - 1) show(index + 1);
     else void submitRequest();
-  });
+  }
+
+  back.addEventListener("click", () => show(index - 1));
+  next.addEventListener("click", advance);
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (index < 3) show(index + 1);
-    else void submitRequest();
+    advance();
   });
 }

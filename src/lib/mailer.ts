@@ -172,7 +172,13 @@ export type QuoteDetails = {
 };
 
 function quoteSections(details: QuoteDetails) {
-  const contact = row("Name", details.name) + row("Email", details.email) + row("Phone", details.phone) + row("Address", details.address) + row("Preferred time", details.when);
+  const contact =
+    row("Name", details.name) +
+    row("Email", details.email) +
+    row("Phone", details.phone) +
+    row("Address", details.address) +
+    row("Frequency", details.frequency) +
+    row("Preferred time", details.when);
   const property =
     row("Property", details.propertyType) +
     row("Bedrooms", details.bedrooms) +
@@ -184,7 +190,6 @@ function quoteSections(details: QuoteDetails) {
     row("Pets", details.pets);
   const service =
     row("Service", details.service) +
-    row("Frequency", details.frequency) +
     row("Last professional clean", details.lastClean) +
     row("Neglected areas", details.neglected) +
     row("Add-ons", details.addons) +
@@ -200,7 +205,16 @@ function quoteText(details: QuoteDetails) {
     line("Email", details.email),
     line("Phone", details.phone),
     line("Address", details.address),
+    line("Frequency", details.frequency),
     line("Preferred time", details.when),
+    "",
+    "Service",
+    line("Service", details.service),
+    line("Last professional clean", details.lastClean),
+    line("Neglected areas", details.neglected),
+    line("Add-ons", details.addons),
+    line("Delicate surfaces", details.delicate),
+    line("Priorities", details.priorities),
     "",
     "Property",
     line("Property", details.propertyType),
@@ -211,15 +225,6 @@ function quoteText(details: QuoteDetails) {
     line("Basement", details.basement),
     line("Household", details.household),
     line("Pets", details.pets),
-    "",
-    "Service",
-    line("Service", details.service),
-    line("Frequency", details.frequency),
-    line("Last professional clean", details.lastClean),
-    line("Neglected areas", details.neglected),
-    line("Add-ons", details.addons),
-    line("Delicate surfaces", details.delicate),
-    line("Priorities", details.priorities),
   ].join("\n");
 }
 
@@ -230,8 +235,8 @@ export function customerQuoteMail(details: QuoteDetails): Mail {
     `<h1 style="margin:0;font-size:26px">We received your request</h1>
      <p style="margin:12px 0 0;color:#5c656c;font-size:16px;line-height:1.5">Thanks, ${esc(details.name) || "there"}. Your details are with our team. This confirms we received them. It is not a confirmed booking yet. We'll reply with your quote and availability.</p>
      ${section("What you sent", parts.contact)}
-     ${section("Property", parts.property)}
-     ${section("Service", parts.service)}`,
+     ${section("Service", parts.service)}
+     ${section("Property", parts.property)}`,
   );
   const text = [
     site.name,
@@ -261,8 +266,8 @@ export function ownerQuoteMail(details: QuoteDetails): Mail {
     `<h1 style="margin:0;font-size:26px">New quote request</h1>
      <p style="margin:12px 0 0;color:#5c656c;font-size:16px">Reply to this email to reach ${esc(details.name) || "the client"} directly.</p>
      ${section("Contact", parts.contact)}
-     ${section("Property", parts.property)}
-     ${section("Service", parts.service)}`,
+     ${section("Service", parts.service)}
+     ${section("Property", parts.property)}`,
   );
   const text = [`New quote request`, "", quoteText(details)].join("\n");
   return {

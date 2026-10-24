@@ -1,109 +1,95 @@
 ---
-import { compareAreas, compareColumns, compareTasks, type Coverage } from "../data/compare";
+import { compareTasks, type CompareTask } from "../data/compare";
 
-const fields = ["regular", "deep", "move"] as const;
-const initialColumn = 2;
-const core = compareTasks.filter((task) => fields.some((field) => task[field] !== 2));
-const covered = core.filter((task) => task.deep === 1).length;
-const percent = Math.round((covered / core.length) * 100);
+const sheets = [
+  { id: "svc-regular", field: "regular", title: "Regular Cleaning", quote: 1 },
+  { id: "svc-deep", field: "deep", title: "Deep Cleaning", quote: 2 },
+  { id: "svc-move", field: "move", title: "Move-In / Move-Out", quote: 3 },
+] as const;
 
-function same(task: (typeof compareTasks)[number]) {
-  return task.regular === task.deep && task.deep === task.move;
+function groupsFor(field: "regular" | "deep" | "move") {
+  const groups: { area: string; names: string[] }[] = [];
+  for (const task of compareTasks) {
+    if (task[field] !== 1) continue;
+    const area = task.area === "Add-ons" ? "Kitchen" : task.area;
+    const group = groups.find((item) => item.area === area);
+    if (group) group.names.push(task.name);
+    else groups.push({ area, names: [task.name] });
+  }
+  return groups;
 }
+
+function addOnNote(task: CompareTask) {
+  const included = [
+    task.regular === 1 ? "Regular" : "",
+    task.deep === 1 ? "Deep" : "",
+    task.move === 1 ? "Move-In / Move-Out" : "",
+  ].filter(Boolean);
+  return included.length ? `Included with ${included.join(" and ")}` : "";
+}
+
+const addOns = compareTasks
+  .filter((task) => task.regular === 2 || task.deep === 2 || task.move === 2)
+  .map((task) => ({ name: task.name, note: addOnNote(task) }));
+
 ---
 
 <section id="compare">
   <div class="w">
     <p class="eb">Compare services</p>
     <h2>What's included in each clean</h2>
-    <p class="lead">Tap a service to see what it covers, filter by area, or show only the differences.</p>
-    <div class="cf">
-      <div class="fl" id="fl" role="group" aria-label="Filter by area">
-        {
-          compareAreas.map((area) => (
-            <button type="button" data-area={area} aria-pressed={area === "All" ? "true" : "false"}>
-              {area}
+    <p class="lead">Each clean is listed on its own. Everything in a list is included. Add-ons are separate.</p>
+    {
+      sheets.map((sheet) => (
+        <article class="sheet" id={sheet.id}>
+          <div class="sheet-top">
+            <h3>{sheet.title}</h3>
+            <button class="sheet-quote" type="button" data-quote={sheet.quote}>
+              Get a quote →
             </button>
+          </div>
+          <div class="sheet-grid">
+            {groupsFor(sheet.field).map((group) => (
+              <div>
+                <h4>{group.area}</h4>
+                <ul>
+                  {group.names.map((name) => (
+                    <li>{name}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </article>
+      ))
+    }
+    <article class="sheet" id="svc-addons">
+      <div class="sheet-top">
+        <h3>Add-ons</h3>
+        <a class="sheet-quote" href="/#quote">Add to my quote →</a>
+      </div>
+      <ul class="addon-list">
+        {
+          addOns.map((item) => (
+            <li>
+              {item.name}
+              {item.note && <small>{item.note}</small>}
+            </li>
           ))
         }
-      </div>
-      <label class="df"><input type="checkbox" id="df" /> Show differences only</label>
-    </div>
-    <div class="cmp">
-      <table id="cmp">
-        <caption class="sr-only">What's included in Regular, Deep, and Move-In / Move-Out cleaning</caption>
-        <thead>
-          <tr>
-            <th scope="col">Area / task</th>
-            {
-              compareColumns.map((column) => (
-                <th scope="col" data-c={column.id} class:list={{ sel: column.id === initialColumn }}>
-                  <button type="button">
-                    {column.lines[0]}
-                    <br />
-                    {column.lines[1]}
-                  </button>
-                </th>
-              ))
-            }
-          </tr>
-        </thead>
-        <tbody id="cmpb">
-          {
-            compareTasks.flatMap((task, index) => {
-              const showGroup = index === 0 || compareTasks[index - 1].area !== task.area;
-              const values: Coverage[] = [task.regular, task.deep, task.move];
-              const row = (
-                <tr data-area={task.area} data-v={values.join(",")} data-same={same(task) ? "true" : "false"}>
-                  <th scope="row">{task.name}</th>
-                  {values.map((value, valueIndex) => (
-                    <td data-c={valueIndex + 1} class:list={{ sel: valueIndex + 1 === initialColumn }}>
-                      {value === 1 && (
-                        <i class="y" aria-label="Included">
-                          ✓
-                        </i>
-                      )}
-                      {value === 0 && (
-                        <i class="n" aria-label="Not included">
-                          ✕
-                        </i>
-                      )}
-                      {value === 2 && (
-                        <i class="a" aria-label="Optional add-on">
-                          Add-on
-                        </i>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              );
-              if (!showGroup) return [row];
-              return [
-                <tr class="gr" data-group={task.area}>
-                  <td colspan="4">{task.area}</td>
-                </tr>,
-                row,
-              ];
-            })
-          }
-          <tr id="cmpempty" hidden>
-            <td colspan="4">No differences in this area.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="lg">
-      <span><i class="y">✓</i> Included</span>
-      <span><i class="n">✕</i> Not included</span>
-      <span><i class="a">Add-on</i> Optional extra</span>
-    </div>
-    <div class="cs" id="cs" aria-live="polite">
-      <div>
-        <strong id="cst">Deep Cleaning covers {covered} of {core.length} tasks, plus optional add-ons.</strong>
-        <div class="mt"><i id="csm" style={`width:${percent}%`}></i></div>
-      </div>
-      <button class="btn" id="csb" type="button">Get a quote for Deep Cleaning →</button>
-    </div>
+      </ul>
+    </article>
+    <dialog class="regular-note" id="regular-note" aria-labelledby="regular-note-copy">
+      <p id="regular-note-copy">
+        Please carefully review our <button class="text-btn" type="button" data-open="regular">Regular Cleaning</button> checklist to understand what's included. New customers are advised to start with a <button class="text-btn" id="regular-note-deep" type="button">Deep Cleaning</button> if your home hasn't been professionally cleaned in the last 30 days.
+      </p>
+      <button class="btn block" id="regular-note-ok" type="button">OK</button>
+    </dialog>
+    <aside class="important">
+      <p>If you're a first-time customer who hasn't had a professional cleaning in the last 30 days, we strongly recommend starting with a <a href="#svc-deep">Deep Cleaning</a>.</p>
+      <p>Please know that our 100% Satisfaction Guarantee does not cover our Home Cleaning per Hour service.</p>
+      <p>Check out our <a href="/#checklists">Cleaning Checklist</a> to see what's included in each of our various cleaning services.</p>
+    </aside>
   </div>
 </section>
 
