@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { termSections, termsContact, termsIntro } from "../data/terms";
+---
+
+<BaseLayout
+  title="Terms & Conditions | The GTA Cleaning Co."
+  description="Terms for booking with The GTA Cleaning Co. in Toronto and the GTA: scope, pricing, cancellations, the satisfaction guarantee, and liability."
+>
+  <section class="terms">
+    <div class="w terms-wrap">
+      <p class="eb">Terms &amp; Conditions</p>
+      <h1>Clear, simple, and transparent.</h1>
+      <p class="lead">{termsIntro}</p>
+      {
+        termSections.map((section) => (
+          <article>
+            <h2>{section.title}</h2>
+            {section.intro && <p>{section.intro}</p>}
+            {section.items.length > 0 && (
+              <ul>
+                {section.items.map((item) => (
+                  <li>
+                    {item.lead && <strong>{item.lead}</strong>} {item.text}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {section.note && <p class="terms-note">{section.note}</p>}
+          </article>
+        ))
+      }
+      <article>
+        <h2>{termsContact.title}</h2>
+        <p>{termsContact.intro}</p>
+        <ul>
+          <li>
+            <strong>Email.</strong> <a href={`mailto:${termsContact.email}`}>{termsContact.email}</a>
+          </li>
+          <li>
+            <strong>Website.</strong> <a href={termsContact.url}>{termsContact.url.replace("https://", "")}</a>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

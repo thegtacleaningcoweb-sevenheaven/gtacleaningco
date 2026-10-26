@@ -20,7 +20,9 @@ const year = new Date().getFullYear();
     </nav>
     <nav aria-label="Good to know">
       <p class="foot-label">Good to know</p>
-      <a href="/#checklists" data-open="policy">Policies</a>
+      <a href="/terms">Terms &amp; Conditions</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/pdfs/policies.pdf" download="our-policies.pdf">Policies</a>
       <a href="/#checklists" data-open="excl">Services we don't provide</a>
     </nav>
     <nav aria-label="Contact">
@@ -28,6 +30,7 @@ const year = new Date().getFullYear();
       <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
       <a href={`mailto:${site.email}`}>{site.email}</a>
       <a href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
       <a href="/#quote">Get a quote</a>
     </nav>
   </div>

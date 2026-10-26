@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { privacyContact, privacyIntro, privacySections } from "../data/privacy";
+---
+
+<BaseLayout
+  title="Privacy Policy | The GTA Cleaning Co."
+  description="How The GTA Cleaning Co. collects, uses, and protects personal information for bookings in Toronto and the GTA."
+>
+  <section class="terms">
+    <div class="w terms-wrap">
+      <p class="eb">Privacy Policy</p>
+      <h1>Your privacy matters.</h1>
+      <p class="lead">{privacyIntro}</p>
+      {
+        privacySections.map((section) => (
+          <article>
+            <h2>{section.title}</h2>
+            {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.items.length > 0 && (
+              section.ordered ? (
+                <ol>
+                  {section.items.map((item) => (
+                    <li>
+                      {item.lead && <strong>{item.lead}</strong>} {item.text}
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <ul>
+                  {section.items.map((item) => (
+                    <li>
+                      {item.lead && <strong>{item.lead}</strong>} {item.text}
+                    </li>
+                  ))}
+                </ul>
+              )
+            )}
+          </article>
+        ))
+      }
+      <article>
+        <h2>{privacyContact.title}</h2>
+        <p>{privacyContact.intro}</p>
+        <ul>
+          <li>
+            <strong>Email.</strong> <a href={`mailto:${privacyContact.email}`}>{privacyContact.email}</a>
+          </li>
+          <li>
+            <strong>Website.</strong> <a href={privacyContact.url}>{privacyContact.url.replace("https://", "")}</a>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

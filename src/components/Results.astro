@@ -9,47 +9,31 @@ import { images } from "../data/images";
     <p class="eb">Proven results</p>
     <h2>Real transformations</h2>
     <div class="res">
-      <div>
-        <div class="ba" id="ba">
-          <Photo class="bf" src={galleryPairs[0].before} alt={galleryPairs[0].beforeAlt} label="Before photo" />
-          <Photo class="af" src={galleryPairs[0].after} alt={galleryPairs[0].afterAlt} label="After photo" />
-          <div class="hd"></div>
-          <span class="tg l">Before</span>
-          <span class="tg r">After</span>
-          <input type="range" min="0" max="100" value="50" aria-label="Compare before and after" id="rg" />
-        </div>
-        <p class="ba-cap" id="ba-cap">{galleryPairs[0].caption}</p>
-      </div>
-      <div>
-        <div class="pairs">
-          {
-            galleryPairs.map((pair, index) => (
-              <button
-                type="button"
-                aria-pressed={index === 0 ? "true" : "false"}
-                data-before={pair.before}
-                data-after={pair.after}
-                data-before-alt={pair.beforeAlt}
-                data-after-alt={pair.afterAlt}
-              >
-                <Photo class="r3" src={pair.before} alt={pair.beforeAlt} label="Before" />
-                <Photo class="r3" src={pair.after} alt={pair.afterAlt} label="After" />
-                <span>{pair.caption}</span>
-              </button>
-            ))
-          }
-        </div>
-        {
-          images.gallery.some(Boolean) && (
-            <div class="gal">
-              {images.gallery.map(
-                (src, index) =>
-                  src && <Photo class="r3" src={src} alt={`Finished cleaning detail ${index + 1}`} label="Add" />,
-              )}
+      {
+        galleryPairs.map((pair) => (
+          <figure>
+            <div class="ba">
+              <Photo class="bf" src={pair.before} alt={pair.beforeAlt} label="Before photo" />
+              <Photo class="af" src={pair.after} alt={pair.afterAlt} label="After photo" />
+              <div class="hd"></div>
+              <span class="tg l">Before</span>
+              <span class="tg r">After</span>
+              <input type="range" min="0" max="100" value="50" aria-label={`Compare before and after: ${pair.caption}`} />
             </div>
-          )
-        }
-      </div>
+            <figcaption class="ba-cap">{pair.caption}</figcaption>
+          </figure>
+        ))
+      }
+      {
+        images.gallery.some(Boolean) && (
+          <div class="gal">
+            {images.gallery.map(
+              (src, index) =>
+                src && <Photo class="r3" src={src} alt={`Finished cleaning detail ${index + 1}`} label="Add" />,
+            )}
+          </div>
+        )
+      }
     </div>
   </div>
 </section>

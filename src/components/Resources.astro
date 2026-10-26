@@ -1,12 +1,13 @@
 ---
 import { checklists } from "../data/checklists";
+import { policiesPdf } from "../data/policies";
 ---
 
 <section id="checklists">
   <div class="w">
     <p class="eb">Resources</p>
     <h2>Know exactly what's included</h2>
-    <p class="lead">Download our cleaning checklists, and see our policies and what falls outside our services.</p>
+    <p class="lead">Download our cleaning checklists and our policies, and see what falls outside our services.</p>
     <div class="rg3">
       {
         checklists.map((item) => (
@@ -26,8 +27,8 @@ import { checklists } from "../data/checklists";
     <div class="rg3 two">
       <div class="rc">
         <h3>Our policies</h3>
-        <p>Payment, arrival, children, health, add-ons, and cancellations.</p>
-        <button class="btn ghost" type="button" data-open="policy">Read policies</button>
+        <p>Payment, children, health, add-ons, and cancellations.</p>
+        <a class="btn" href={policiesPdf.href} download={policiesPdf.filename}>Download PDF</a>
       </div>
       <div class="rc">
         <h3>Services we don't provide</h3>

@@ -29,7 +29,15 @@ import { about, faqs, reviews } from "../data/content";
         faqs.map((item) => (
           <details>
             <summary>{item.question}</summary>
-            <p>{item.answer}</p>
+            <p>
+              {item.answer}
+              {"more" in item && (
+                <>
+                  {" "}
+                  <a href={item.more.href}>{item.more.label}</a>
+                </>
+              )}
+            </p>
           </details>
         ))
       }
