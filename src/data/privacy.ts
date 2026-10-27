@@ -70,5 +70,5 @@ export const privacyContact = {
   title: "Contact us",
   intro: "If you have a question about this policy or how your data is handled, reach out.",
   email: site.email,
-  url: site.url,
+  url: site.website,
 };

@@ -123,5 +123,5 @@ export const termsContact = {
   title: "Questions? Contact us",
   intro: "If you have a question about these terms, reach out.",
   email: site.email,
-  url: site.url,
+  url: site.website,
 };

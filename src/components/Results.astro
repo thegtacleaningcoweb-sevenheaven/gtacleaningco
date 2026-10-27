@@ -24,21 +24,40 @@ import { images } from "../data/images";
           </figure>
         ))
       }
-      {
-        images.gallery.some(Boolean) && (
-          <div class="gal">
-            {images.gallery.map(
-              (src, index) =>
-                src && <Photo class="r3" src={src} alt={`Finished cleaning detail ${index + 1}`} label="Add" />,
-            )}
-          </div>
-        )
-      }
+      <div class="gal-cta">
+        <button class="btn" type="button" data-gallery-open>Gallery</button>
+      </div>
     </div>
   </div>
+  <dialog id="gallery" class="gallery" aria-labelledby="gallery-title">
+    <div class="dh">
+      <h2 id="gallery-title">Gallery</h2>
+      <button class="gallery-x" type="button" data-gallery-close aria-label="Close">×</button>
+    </div>
+    <div class="gallery-grid" data-gallery-grid>
+      {
+        images.gallery.map((photo, index) => (
+          <button class="gallery-thumb" type="button" data-gallery-index={index} aria-label={photo.alt}>
+            <img src={photo.src} alt={photo.alt} width="768" height="1024" loading="lazy" decoding="async" />
+          </button>
+        ))
+      }
+    </div>
+    <div class="gallery-view" data-gallery-view hidden>
+      <button class="gallery-x" type="button" data-gallery-close aria-label="Close">×</button>
+      <button class="gallery-nav prev" type="button" data-gallery-prev aria-label="Previous photo">&lt;</button>
+      <div class="gallery-stage">
+        <img data-gallery-full alt="" tabindex="-1" />
+      </div>
+      <button class="gallery-nav next" type="button" data-gallery-next aria-label="Next photo">&gt;</button>
+      <p class="gallery-count" data-gallery-count aria-live="polite"></p>
+    </div>
+  </dialog>
 </section>
 
 <script>
   import { initSlider } from "../scripts/slider";
+  import { initGallery } from "../scripts/gallery";
   initSlider();
+  initGallery();
 </script>

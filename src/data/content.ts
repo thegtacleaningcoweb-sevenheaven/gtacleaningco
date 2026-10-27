@@ -48,7 +48,7 @@ export const services = [
     href: "/#quote",
     link: "Get a quote →",
     image: images.servicePost,
-    alt: "Bathroom ready after post-construction cleaning",
+    alt: "Modern kitchen finished after a post-construction clean",
   },
   {
     id: 5,
@@ -226,8 +226,8 @@ export const galleryPairs = [
     caption: "Bathroom",
     before: images.bathBefore,
     after: images.bathAfter,
-    beforeAlt: "Bathroom before cleaning, with a mop and bucket",
-    afterAlt: "Bathroom after cleaning",
+    beforeAlt: "Bathtub before cleaning, with soap scum along the tub",
+    afterAlt: "Bathtub after cleaning, bright and clear",
   },
   {
     caption: "Kids' bedroom",
@@ -247,7 +247,14 @@ export const galleryPairs = [
     caption: "Living room",
     before: images.livingBefore,
     after: images.livingAfter,
-    beforeAlt: "Living room before cleaning",
-    afterAlt: "Living room after cleaning",
+    beforeAlt: "Living room before cleaning, with a jacket on the sofa",
+    afterAlt: "Living room after cleaning, with the sofa cleared",
+  },
+  {
+    caption: "Kitchen sink",
+    before: images.sinkBefore,
+    after: images.sinkAfter,
+    beforeAlt: "Kitchen sink before cleaning, with water spots in the basin",
+    afterAlt: "Kitchen sink after cleaning, bright and clear",
   },
 ] as const;

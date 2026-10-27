@@ -265,7 +265,8 @@ function drawPolicies(page: PDFPage, body: PDFFont, strong: PDFFont, display: PD
   }
 
   if (y < 46) throw new Error("Policies do not fit on one page");
-  page.drawText(`${site.phoneDisplay}   ·   ${site.email}`, {
+  const website = site.website.replace("https://", "");
+  page.drawText(`${site.phoneDisplay}   ·   ${site.email}   ·   ${website}`, {
     x: margin,
     y: 26,
     size: 9,
