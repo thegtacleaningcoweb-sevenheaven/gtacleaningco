@@ -659,6 +659,25 @@ header {
   right: 14px;
 }
 
+.ba-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.55);
+  font: 500 0.78rem Figtree, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .ba-cap {
   margin: 12px 0 0;
   font-weight: 600;
@@ -731,16 +750,21 @@ dialog.gallery.is-view .gallery-x {
 .gallery-grid:not([hidden]) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-auto-rows: max-content;
+  align-content: start;
   gap: 10px;
   padding: 16px 20px 24px;
-  max-height: calc(92vh - 82px);
+  min-height: 0;
+  flex: 1 1 auto;
   overflow: auto;
 }
 
 .gallery-thumb {
+  position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: auto;
+  min-width: 0;
   padding: 0;
   border: 0;
   border-radius: 14px;
@@ -749,11 +773,19 @@ dialog.gallery.is-view .gallery-x {
   cursor: pointer;
 }
 
+.gallery-thumb::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
 .gallery-thumb img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  display: block;
 }
 
 .gallery-view:not([hidden]) {
@@ -1648,6 +1680,12 @@ dialog.regular-note .text-btn {
   .nav .btn {
     flex: 1;
     text-align: center;
+  }
+
+  .gallery-grid:not([hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
   }
 
   #cmp {

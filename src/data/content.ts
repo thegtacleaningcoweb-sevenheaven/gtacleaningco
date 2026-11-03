@@ -48,7 +48,7 @@ export const services = [
     href: "/#quote",
     link: "Get a quote →",
     image: images.servicePost,
-    alt: "Modern kitchen finished after a post-construction clean",
+    alt: "White kitchen with cooktop finished after a post-construction clean",
   },
   {
     id: 5,
@@ -100,13 +100,13 @@ export const reasons = [
 ] as const;
 
 export const about = {
-  title: "Hi, we're The GTA Cleaning Co.",
+  title: "Hi, I'm Lari, founder of The GTA Cleaning Co.",
   paragraphs: [
-    "Proudly rooted in our Mexican heritage and locally operated right here in the GTA, we are a dedicated cleaning business committed to elevating your living and working spaces. We specialize in meticulous, top-quality services—from regular maintenance to deep and move-in cleans—tailored specifically to your household's needs.",
+    "Proudly rooted in my Mexican heritage and locally operated right here in the GTA, my team and I are dedicated to elevating your living and working spaces. We specialize in meticulous, top-quality services—from regular maintenance to deep and move-in cleans—tailored specifically to your household's needs.",
     "Hands-on oversight, absolute reliability, and a passion for sparkling results define everything we do. Locally trusted, neighbor approved, and fully insured—let us take care of the details so you can enjoy a spotless home.",
   ],
   image: images.team,
-  alt: "Portrait of the person behind The GTA Cleaning Co.",
+  alt: "Portrait of Lari, founder of The GTA Cleaning Co.",
 } as const;
 
 export const reviews = [

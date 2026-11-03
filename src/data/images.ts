@@ -41,6 +41,12 @@ export const images = {
     { src: "/images/gallery/14.webp", alt: "Bedroom with the bed made and bedside lamps on" },
     { src: "/images/gallery/15.webp", alt: "Dining table with items left on top" },
     { src: "/images/gallery/16.webp", alt: "Dining table set with flowers" },
+    { src: "/images/gallery/17.webp", alt: "Oven open after a deep clean, with clear racks and glass" },
+    { src: "/images/gallery/18.webp", alt: "Stainless range hood cleaned under dark cabinets" },
+    { src: "/images/gallery/19.webp", alt: "Open kitchen and living area after cleaning, with balcony doors" },
+    { src: "/images/gallery/20.webp", alt: "White kitchen with black counters after a renovation clean" },
+    { src: "/images/gallery/21.webp", alt: "Gas cooktop cleaned on a marble counter" },
+    { src: "/images/gallery/22.webp", alt: "Bathroom vanity with black faucets after cleaning" },
   ],
   team: "/images/about.jpg",
 } as const;
