@@ -5,7 +5,7 @@ export const site = {
   title: "The GTA Cleaning Co. | Premium Home & Commercial Cleaning in Toronto",
   description:
     "Premium home and commercial cleaning in Toronto and the GTA. Insured, eco-friendly, and quality-checked on every visit.",
-  url: "https://thecleaningco.ca",
+  url: "https://www.thegtacleaningco.ca",
   website: "https://thegtacleaningco.ca",
   email: "thegtacleaningco@gmail.com",
   phoneDisplay: "(437) 484-4778",

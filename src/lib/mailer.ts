@@ -1,5 +1,3 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { offerAmount, offerCode } from "../data/offer";
 import { site } from "../data/site";
 import { isProd, readEnv } from "./env";
@@ -280,6 +278,7 @@ export function ownerQuoteMail(details: QuoteDetails): Mail {
 }
 
 async function writeOutbox(message: Mail) {
+  const [{ mkdir, writeFile }, path] = await Promise.all([import("node:fs/promises"), import("node:path")]);
   const dir = path.join(process.cwd(), ".data", "outbox");
   await mkdir(dir, { recursive: true });
   const stamp = new Date().toISOString().replaceAll(":", "-");

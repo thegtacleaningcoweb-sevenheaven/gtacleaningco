@@ -8,7 +8,14 @@ import { policiesPdf } from "./src/data/policies.ts";
 
 export default defineConfig({
   site: site.url,
-  adapter: vercel({ imageService: false }),
+  adapter: vercel({
+    imageService: false,
+  }),
+  image: {
+    service: {
+      entrypoint: "astro/assets/services/noop",
+    },
+  },
   compressHTML: true,
   trailingSlash: "never",
   build: {

@@ -1,4 +1,4 @@
-import { an as NOOP_MIDDLEWARE_HEADER, ao as REDIRECT_STATUS_CODES, A as AstroError, ap as ActionsReturnedInvalidDataError, W as DEFAULT_404_COMPONENT } from './astro/server_C5nwYFvB.mjs';
+import { an as NOOP_MIDDLEWARE_HEADER, ao as REDIRECT_STATUS_CODES, A as AstroError, ap as ActionsReturnedInvalidDataError, W as DEFAULT_404_COMPONENT } from './astro/server_JsRpv1hr.mjs';
 import { parse, stringify } from 'devalue';
 import { escape } from 'html-escaper';
 
@@ -12,7 +12,7 @@ const ACTION_QUERY_PARAMS$1 = {
   actionName: "_action"};
 const ACTION_RPC_ROUTE_PATTERN = "/_actions/[...path]";
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://thecleaningco.ca", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://www.thegtacleaningco.ca", "SSR": true};
 const ACTION_QUERY_PARAMS = ACTION_QUERY_PARAMS$1;
 const codeToStatusMap = {
   // Implemented from IANA HTTP Status Code Registry

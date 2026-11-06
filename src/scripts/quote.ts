@@ -88,7 +88,14 @@ export function initQuote() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload()),
       });
-      const result = (await response.json()) as { ok?: boolean; error?: string };
+      const raw = await response.text();
+      let result: { ok?: boolean; error?: string } = {};
+      try {
+        result = raw ? (JSON.parse(raw) as { ok?: boolean; error?: string }) : {};
+      } catch {
+        error.textContent = "We couldn't send that just now. Please call us and we'll take it from here.";
+        return;
+      }
       if (!response.ok || !result.ok) {
         error.textContent = result.error || "We couldn't send that. Please try again.";
         return;

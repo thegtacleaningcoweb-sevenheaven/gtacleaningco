@@ -1,5 +1,5 @@
 import { i as isRemoteAllowed, j as joinPaths, a as isRemotePath, t as typeHandlers, b as types } from './index_BAPvq1xm.mjs';
-import { A as AstroError, E as ExpectedImage, L as LocalImageUsedWrongly, M as MissingImageDimension, U as UnsupportedImageFormat, I as IncompatibleDescriptorOptions, a as UnsupportedImageConversion, t as toStyleString, N as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, R as RemoteImageNotAllowed, b as ExpectedImageOptions, c as ExpectedNotESMImage, d as InvalidImageService, e as createAstro, f as createComponent, g as ImageMissingAlt, m as maybeRenderHead, h as addAttribute, s as spreadAttributes, r as renderTemplate, i as ExperimentalFontsNotEnabled, j as FontFamilyNotFound, u as unescapeHTML } from './astro/server_C5nwYFvB.mjs';
+import { A as AstroError, E as ExpectedImage, L as LocalImageUsedWrongly, M as MissingImageDimension, U as UnsupportedImageFormat, I as IncompatibleDescriptorOptions, a as UnsupportedImageConversion, t as toStyleString, N as NoImageMetadata, F as FailedToFetchRemoteImageDimensions, R as RemoteImageNotAllowed, b as ExpectedImageOptions, c as ExpectedNotESMImage, d as InvalidImageService, e as createAstro, f as createComponent, g as ImageMissingAlt, m as maybeRenderHead, h as addAttribute, s as spreadAttributes, r as renderTemplate, i as ExperimentalFontsNotEnabled, j as FontFamilyNotFound, u as unescapeHTML } from './astro/server_JsRpv1hr.mjs';
 import 'clsx';
 import * as mime from 'mrmime';
 import 'piccolore';
@@ -149,13 +149,6 @@ function isLocalService(service) {
   }
   return "transform" in service;
 }
-function parseQuality(quality) {
-  let result = parseInt(quality);
-  if (Number.isNaN(result)) {
-    return quality;
-  }
-  return result;
-}
 const sortNumeric = (a, b) => a - b;
 function verifyOptions(options) {
   if (!options.src || !isRemoteImage(options.src) && !isESMImportedImage(options.src)) {
@@ -209,6 +202,7 @@ function verifyOptions(options) {
   }
 }
 const baseService = {
+  propertiesToHash: DEFAULT_HASH_PROPS,
   validateOptions(options) {
     if (isESMImportedImage(options.src) && options.src.format === "svg") {
       options.format = "svg";
@@ -531,7 +525,7 @@ async function getConfiguredImageService() {
   if (!globalThis?.astroAsset?.imageService) {
     const { default: service } = await import(
       // @ts-expect-error
-      './sharp_yEHfU_nk.mjs'
+      './noop_Bc4WXSsb.mjs'
     ).catch((e) => {
       const error = new AstroError(InvalidImageService);
       error.cause = e;
@@ -694,7 +688,7 @@ async function getImage$1(options, imageConfig) {
   };
 }
 
-const $$Astro$2 = createAstro("https://thecleaningco.ca");
+const $$Astro$2 = createAstro("https://www.thegtacleaningco.ca");
 const $$Image = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
   Astro2.self = $$Image;
@@ -723,7 +717,7 @@ const $$Image = createComponent(async ($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<img${addAttribute(image.src, "src")}${spreadAttributes(attributes)}${addAttribute(className, "class")}>`;
 }, "/Users/juandavidnavarrogayon/Documents/thecleaningco/node_modules/astro/components/Image.astro", void 0);
 
-const $$Astro$1 = createAstro("https://thecleaningco.ca");
+const $$Astro$1 = createAstro("https://www.thegtacleaningco.ca");
 const $$Picture = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
   Astro2.self = $$Picture;
@@ -833,7 +827,7 @@ function checkWeight(input, target) {
   return input === target;
 }
 
-const $$Astro = createAstro("https://thecleaningco.ca");
+const $$Astro = createAstro("https://www.thegtacleaningco.ca");
 const $$Font = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$Font;
@@ -854,7 +848,7 @@ const $$Font = createComponent(($$result, $$props, $$slots) => {
 }, "/Users/juandavidnavarrogayon/Documents/thecleaningco/node_modules/astro/components/Font.astro", void 0);
 
 const assetQueryParams = undefined;
-							const imageConfig = {"endpoint":{"route":"/_image"},"service":{"entrypoint":"astro/assets/services/sharp","config":{}},"domains":[],"remotePatterns":[],"responsiveStyles":false};
+							const imageConfig = {"endpoint":{"route":"/_image"},"service":{"entrypoint":"astro/assets/services/noop","config":{}},"domains":[],"remotePatterns":[],"responsiveStyles":false};
 							Object.defineProperty(imageConfig, 'assetQueryParams', {
 								value: assetQueryParams,
 								enumerable: false,
@@ -956,4 +950,4 @@ const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
 
 const page = () => _page;
 
-export { page as a, baseService as b, parseQuality as p };
+export { baseService as b, isESMImportedImage as i, page as p, verifyOptions as v };
