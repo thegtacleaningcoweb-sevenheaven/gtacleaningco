@@ -35,6 +35,15 @@ function payload() {
   };
 }
 
+function formatPhone(value: string) {
+  let digits = value.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
+  digits = digits.slice(0, 10);
+  if (digits.length <= 3) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) - ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) - ${digits.slice(3, 6)} - ${digits.slice(6)}`;
+}
+
 export function initQuote() {
   const form = document.getElementById("f") as HTMLFormElement | null;
   const wrap = document.getElementById("formWrap");
@@ -46,9 +55,14 @@ export function initQuote() {
   const error = document.getElementById("err");
   const done = document.getElementById("done");
   const bar = wrap?.querySelector<HTMLElement>(".bar");
+  const phone = document.getElementById("phone") as HTMLInputElement | null;
   if (!form || !wrap || !stepName || !back || !next || !error || !done || !bar) return;
 
   let index = 0;
+
+  phone?.addEventListener("input", () => {
+    phone.value = formatPhone(phone.value);
+  });
 
   function contactError() {
     if (!field("name")) return "Please add your name so we can follow up.";

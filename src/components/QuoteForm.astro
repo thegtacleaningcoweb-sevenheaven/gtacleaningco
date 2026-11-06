@@ -24,7 +24,7 @@
             </div>
             <div class="fld">
               <label class="f" for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+              <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" placeholder="(xxx) - xxx - xxxx" maxlength="18" />
             </div>
           </div>
           <div class="fld">
@@ -81,7 +81,15 @@
           </div>
           <div class="fld">
             <label class="f" for="last">When was the last professional cleaning?</label>
-            <input type="text" id="last" name="last" placeholder="e.g. 3 months ago, never" />
+            <select id="last" name="last">
+              <option value="">Select one</option>
+              <option>Less than 1 month ago</option>
+              <option>1–3 months ago</option>
+              <option>3–6 months ago</option>
+              <option>6–12 months ago</option>
+              <option>More than a year ago</option>
+              <option>Never / first time</option>
+            </select>
           </div>
           <div class="fld">
             <label class="f" for="neglect">Any areas not cleaned in a long time?</label>
@@ -105,15 +113,41 @@
           <div class="g">
             <div class="fld">
               <label class="f" for="bed">Bedrooms</label>
-              <input type="number" id="bed" name="bed" min="0" inputmode="numeric" />
+              <select id="bed" name="bed">
+                <option value="">Select</option>
+                <option>Studio</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6+</option>
+              </select>
             </div>
             <div class="fld">
               <label class="f" for="bath">Bathrooms</label>
-              <input type="number" id="bath" name="bath" min="0" inputmode="numeric" />
+              <select id="bath" name="bath">
+                <option value="">Select</option>
+                <option>1</option>
+                <option>1.5</option>
+                <option>2</option>
+                <option>2.5</option>
+                <option>3</option>
+                <option>3.5</option>
+                <option>4</option>
+                <option>4.5</option>
+                <option>5+</option>
+              </select>
             </div>
             <div class="fld">
               <label class="f" for="lvl">Levels / floors</label>
-              <input type="number" id="lvl" name="lvl" min="1" inputmode="numeric" />
+              <select id="lvl" name="lvl">
+                <option value="">Select</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4+</option>
+              </select>
             </div>
             <div class="fld">
               <label class="f" for="sqft">Approx. square feet</label>

@@ -39,7 +39,7 @@ export const services = [
     href: "/#svc-move",
     link: "See what's included →",
     image: images.serviceMove,
-    alt: "Room packed up ahead of a move-out clean",
+    alt: "Empty condo room ready after a move-in or move-out clean",
   },
   {
     id: 4,
