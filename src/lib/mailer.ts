@@ -42,7 +42,12 @@ function section(title: string, rows: string) {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #dce2e6">${rows}</table>`;
 }
 
+function logoUrl() {
+  return new URL("/images/email-logo.png", site.url).href;
+}
+
 function shell(preheader: string, body: string) {
+  const logo = logoUrl();
   return `<!doctype html>
 <html lang="en">
   <body style="margin:0;padding:0;background:#f4f6f7;color:#121416;font-family:Figtree,Segoe UI,Helvetica,Arial,sans-serif">
@@ -52,7 +57,11 @@ function shell(preheader: string, body: string) {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden">
             <tr>
-              <td style="background:#094078;padding:22px 28px;color:#ffffff;font-size:18px;font-weight:700">${esc(site.name)}</td>
+              <td style="background:#094078;padding:0;line-height:0">
+                <a href="${esc(site.url)}" style="display:block;text-decoration:none">
+                  <img src="${esc(logo)}" width="560" height="112" alt="${esc(site.name)}" style="display:block;width:100%;max-width:560px;height:auto;border:0;outline:none;text-decoration:none" />
+                </a>
+              </td>
             </tr>
             <tr>
               <td style="padding:28px">${body}
